@@ -5,21 +5,27 @@
 
 // ===== DATA =====
 const APP_DATA = {
-    gasoilWeekly: [52, 68, 95, 74, 61, 45, 58],
-    gasoilDays: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
-    costBefore: [8360, 6960, 2213, 2205, 1900],
-    costAfter: [3200, 2400, 880, 1540, 760],
+    // Données gasoil: fiche de suivi Tableau 21 du rapport (semaine type)
+    gasoilWeekly: [3.5, 2.8, 9.1, 10.2, 18.5, 2.2],
+    gasoilDays: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    // Coûts Avant/Après: Tableau 31 du rapport
+    costBefore: [21660, 20880, 6639, 6615, 5700],
+    costAfter: [16591, 14616, 2951, 4631, 3784],
     costLabels: ['Pan. 580', 'Pan. 440', 'Câble', 'Gasoil', 'Struct.'],
-    wasteMonths: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
-    wastePanneaux: [46, 38, 29, 22, 15, 12],
-    wasteCable: [494, 480, 420, 350, 290, 210],
-    wasteGasoil: [1110, 1050, 920, 840, 750, 680],
-    auditHistory: {
-        seiri: [3, 4],
-        seiton: [2, 3],
-        seiso: [3, 4],
-        seiketsu: [2, 3],
-        shitsuke: [2, 3]
+    // Évolution déchets: Tableau 6 - taux par composant (en %)
+    wasteMonths: ['Jan', 'Fév', 'Mar'],
+    wastePanneaux580: [22, 7, 15],
+    wastePanneaux440: [12, 10, 5],
+    wasteCable: [32, 26, 22],
+    wasteStructure: [13, 10, 13],
+    wasteGasoil: [28, 38, 48],
+    // 1er audit 5S: Tableau 23 du rapport
+    auditScores: {
+        seiri: 2.5,    // Moyenne (2+3)/2
+        seiton: 1.5,   // Moyenne (2+1)/2
+        seiso: 3,      // Moyenne (3+3)/2
+        seiketsu: 1,   // Moyenne (1+1)/2
+        shitsuke: 1    // Moyenne (1+1)/2
     }
 };
 
@@ -82,7 +88,7 @@ function initNavigation() {
         if (pageId === 'dashboard') {
             setTimeout(() => {
                 drawCostChart();
-                drawGaugeChart(72);
+                drawGaugeChart(36);
                 drawWasteChart();
             }, 100);
         }
@@ -144,16 +150,15 @@ function initNotifications() {
 // ===== DATE =====
 function initDate() {
     const dateEl = document.getElementById('current-date');
-    const now = new Date();
-    const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-    dateEl.textContent = now.toLocaleDateString('fr-FR', options);
+    // Date fixe: 25 mai 2026 (comme demandé)
+    dateEl.textContent = 'dim. 25 mai 2026';
 
     // Set form dates
-    const today = now.toISOString().split('T')[0];
+    const fixedDate = '2026-05-25';
     const gasoilDate = document.getElementById('gasoil-date');
     const rcDate = document.getElementById('rc-date');
-    if (gasoilDate) gasoilDate.value = today;
-    if (rcDate) rcDate.value = today;
+    if (gasoilDate) gasoilDate.value = fixedDate;
+    if (rcDate) rcDate.value = fixedDate;
 }
 
 // ===== KPI ANIMATION =====
@@ -181,7 +186,7 @@ function animateKPIs() {
 // ===== CHARTS =====
 function initCharts() {
     drawCostChart();
-    drawGaugeChart(72);
+    drawGaugeChart(36);
     drawWasteChart();
     drawGasoilChart();
     drawRadarChart();
@@ -205,6 +210,7 @@ function drawCostChart() {
     ctx.clearRect(0, 0, W, H);
 
     const { costBefore, costAfter, costLabels } = APP_DATA;
+    // Valeurs réelles du rapport: Tableau 31 (Bilan financier)
     const maxVal = Math.max(...costBefore) * 1.15;
     const barAreaX = 50;
     const barAreaW = W - 60;
@@ -329,11 +335,12 @@ function drawWasteChart() {
 
     ctx.clearRect(0, 0, W, H);
 
-    const { wasteMonths, wastePanneaux } = APP_DATA;
+    // Taux de déchets réels du rapport: Tableau 6
+    const { wasteMonths, wasteGasoil } = APP_DATA;
     const padL = 40, padR = 10, padT = 15, padB = 30;
     const chartW = W - padL - padR;
     const chartH = H - padT - padB;
-    const maxVal = 50;
+    const maxVal = 55;
 
     // Grid
     ctx.strokeStyle = 'rgba(255,255,255,0.04)';
@@ -361,50 +368,61 @@ function drawWasteChart() {
         ctx.fillText(m, x, H - 8);
     });
 
-    // Line
-    const points = wastePanneaux.map((v, i) => ({
-        x: padL + (chartW / (wasteMonths.length - 1)) * i,
-        y: padT + chartH - (v / maxVal) * chartH
-    }));
+    // Données multiples du rapport
+    const datasets = [
+        { data: APP_DATA.wasteGasoil, color: '#ef4444', label: 'Gasoil' },
+        { data: APP_DATA.wasteCable, color: '#f59e0b', label: 'Câble' },
+        { data: APP_DATA.wastePanneaux580, color: '#3b82f6', label: 'Pan.580' },
+        { data: APP_DATA.wastePanneaux440, color: '#8b5cf6', label: 'Pan.440' },
+        { data: APP_DATA.wasteStructure, color: '#22c55e', label: 'Struct.' }
+    ];
 
-    // Area fill
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, padT + chartH);
-    points.forEach(p => ctx.lineTo(p.x, p.y));
-    ctx.lineTo(points[points.length - 1].x, padT + chartH);
-    ctx.closePath();
-    const areaGrad = ctx.createLinearGradient(0, padT, 0, padT + chartH);
-    areaGrad.addColorStop(0, 'rgba(34,197,94,0.15)');
-    areaGrad.addColorStop(1, 'rgba(34,197,94,0)');
-    ctx.fillStyle = areaGrad;
-    ctx.fill();
+    datasets.forEach(ds => {
+        const points = ds.data.map((v, i) => ({
+            x: padL + (chartW / (wasteMonths.length - 1)) * i,
+            y: padT + chartH - (v / maxVal) * chartH
+        }));
 
-    // Line stroke
-    ctx.beginPath();
-    ctx.strokeStyle = '#22c55e';
-    ctx.lineWidth = 2.5;
-    ctx.lineJoin = 'round';
-    points.forEach((p, i) => {
-        if (i === 0) ctx.moveTo(p.x, p.y);
-        else ctx.lineTo(p.x, p.y);
-    });
-    ctx.stroke();
-
-    // Points
-    points.forEach((p, i) => {
+        // Line stroke
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#22c55e';
-        ctx.fill();
-        ctx.strokeStyle = '#0a1628';
+        ctx.strokeStyle = ds.color;
         ctx.lineWidth = 2;
+        ctx.lineJoin = 'round';
+        points.forEach((p, i) => {
+            if (i === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+        });
         ctx.stroke();
 
-        // Value label
-        ctx.fillStyle = '#e2e8f0';
-        ctx.font = 'bold 9px Inter';
-        ctx.textAlign = 'center';
-        ctx.fillText(wastePanneaux[i], p.x, p.y - 10);
+        // Points
+        points.forEach((p, i) => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = ds.color;
+            ctx.fill();
+            ctx.strokeStyle = '#0a1628';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Value label
+            ctx.fillStyle = ds.color;
+            ctx.font = 'bold 8px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText(ds.data[i] + '%', p.x, p.y - 8);
+        });
+    });
+
+    // Legend
+    let legendX = padL;
+    const legendY = H - 4;
+    ctx.font = '8px Inter';
+    datasets.forEach(ds => {
+        ctx.fillStyle = ds.color;
+        ctx.fillRect(legendX, legendY - 6, 8, 3);
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'left';
+        ctx.fillText(ds.label, legendX + 10, legendY - 2);
+        legendX += 55;
     });
 }
 
@@ -429,8 +447,8 @@ function drawGasoilChart() {
     const padL = 35, padR = 10, padT = 15, padB = 30;
     const chartW = W - padL - padR;
     const chartH = H - padT - padB;
-    const maxVal = 110;
-    const threshold = 70;
+    const maxVal = 22;
+    const threshold = 12;
 
     // Threshold line
     const thresholdY = padT + chartH - (threshold / maxVal) * chartH;
@@ -445,7 +463,7 @@ function drawGasoilChart() {
     ctx.fillStyle = '#f59e0b';
     ctx.font = '8px Inter';
     ctx.textAlign = 'left';
-    ctx.fillText('Seuil: 70L', padL + 2, thresholdY - 4);
+    ctx.fillText('Seuil: 12L', padL + 2, thresholdY - 4);
 
     // Grid
     ctx.strokeStyle = 'rgba(255,255,255,0.04)';
@@ -531,8 +549,10 @@ function drawRadarChart() {
 
     const cx = 150, cy = 150, r = 110;
     const labels = ['Seiri', 'Seiton', 'Seiso', 'Seiketsu', 'Shitsuke'];
-    const current = [4, 3, 4, 3, 3];
-    const previous = [3, 2, 3, 2, 2];
+    // Scores du 1er audit (Tableau 23): Seiri=2.5, Seiton=1.5, Seiso=3, Seiketsu=1, Shitsuke=1
+    const current = [2.5, 1.5, 3, 1, 1];
+    // Objectif à 3 mois: 70/100 => ~3.5/5 par catégorie
+    const target = [3.5, 3.5, 3.5, 3.5, 3.5];
     const maxVal = 5;
     const sides = 5;
     const angleStep = (Math.PI * 2) / sides;
@@ -573,11 +593,11 @@ function drawRadarChart() {
         ctx.fillText(labels[i], lx, ly);
     }
 
-    // Previous data (gray)
-    drawRadarArea(ctx, cx, cy, r, previous, maxVal, sides, startOffset, angleStep, 'rgba(100,116,139,0.15)', 'rgba(100,116,139,0.4)');
+    // Objectif à 3 mois (vert, pointillé)
+    drawRadarArea(ctx, cx, cy, r, target, maxVal, sides, startOffset, angleStep, 'rgba(34,197,94,0.08)', 'rgba(34,197,94,0.4)');
 
-    // Current data (green)
-    drawRadarArea(ctx, cx, cy, r, current, maxVal, sides, startOffset, angleStep, 'rgba(34,197,94,0.2)', '#22c55e');
+    // 1er Audit - scores réels (orange/rouge)
+    drawRadarArea(ctx, cx, cy, r, current, maxVal, sides, startOffset, angleStep, 'rgba(245,158,11,0.2)', '#f59e0b');
 }
 
 function drawRadarArea(ctx, cx, cy, r, data, maxVal, sides, startOffset, angleStep, fillColor, strokeColor) {

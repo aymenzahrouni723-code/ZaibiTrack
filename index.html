@@ -82,24 +82,24 @@
                 <div class="notif-item notif-danger">
                     <div class="notif-icon">🔴</div>
                     <div class="notif-content">
-                        <strong>Stock Critique</strong>
-                        <p>AC Cable 6mm² en dessous du seuil min (115m / 150m)</p>
+                        <strong>Stock Critique — Cable AC 4mm</strong>
+                        <p>Cable AC 4mm en zone ROUGE : 120m restant (seuil: 150m)</p>
                         <span class="notif-time">Il y a 2h</span>
                     </div>
                 </div>
                 <div class="notif-item notif-warning">
                     <div class="notif-icon">🟡</div>
                     <div class="notif-content">
-                        <strong>Commande Requise</strong>
-                        <p>Panneaux 440W : stock à 78 unités (seuil: 70)</p>
+                        <strong>Panneaux 440W — Zone Jaune</strong>
+                        <p>Stock à 18 pièces (seuil alerte: 15-25 pièces)</p>
                         <span class="notif-time">Il y a 5h</span>
                     </div>
                 </div>
                 <div class="notif-item notif-info">
                     <div class="notif-icon">📊</div>
                     <div class="notif-content">
-                        <strong>Audit 5S planifié</strong>
-                        <p>Prochain audit dépôt prévu le 15/06/2026</p>
+                        <strong>Audit 5S — 1er Audit réalisé</strong>
+                        <p>Score obtenu : 18/50 soit 36/100 — Objectif : 70/100</p>
                         <span class="notif-time">Hier</span>
                     </div>
                 </div>
@@ -144,26 +144,26 @@
                     <div class="kpi-card kpi-danger">
                         <div class="kpi-header">
                             <span class="kpi-label">Panneaux Perdus</span>
-                            <span class="kpi-trend trend-down">↓ -38%</span>
+                            <span class="kpi-trend trend-down">↓ -61%</span>
                         </div>
-                        <div class="kpi-value">12</div>
-                        <div class="kpi-sub">ce mois-ci</div>
+                        <div class="kpi-value">129</div>
+                        <div class="kpi-sub">sur 3 mois (57+72)</div>
                     </div>
                     <div class="kpi-card kpi-warning">
                         <div class="kpi-header">
                             <span class="kpi-label">Déchet Câble</span>
-                            <span class="kpi-trend trend-down">↓ -24%</span>
+                            <span class="kpi-trend trend-down">↓ -56%</span>
                         </div>
-                        <div class="kpi-value">8%</div>
-                        <div class="kpi-sub">vs 32% avant</div>
+                        <div class="kpi-value">27%</div>
+                        <div class="kpi-sub">objectif &lt;12%</div>
                     </div>
                     <div class="kpi-card kpi-success">
                         <div class="kpi-header">
-                            <span class="kpi-label">Économie Gasoil</span>
-                            <span class="kpi-trend trend-up">↑ +5%</span>
+                            <span class="kpi-label">Coût Pertes</span>
+                            <span class="kpi-trend trend-down">↓ -54%</span>
                         </div>
-                        <div class="kpi-value">32%</div>
-                        <div class="kpi-sub">d'efficacité</div>
+                        <div class="kpi-value">61K</div>
+                        <div class="kpi-sub">DT / trimestre</div>
                     </div>
                 </div>
 
@@ -189,11 +189,11 @@
                     <div class="gauge-container">
                         <canvas id="gaugeChart" width="200" height="200"></canvas>
                         <div class="gauge-value">
-                            <span class="gauge-number" id="gauge-number">72</span>
+                            <span class="gauge-number" id="gauge-number">36</span>
                             <span class="gauge-max">/ 100</span>
                         </div>
-                        <div class="gauge-label good">BON</div>
-                        <div class="gauge-target">Objectif : 80</div>
+                        <div class="gauge-label bad">À AMÉLIORER</div>
+                        <div class="gauge-target">Objectif : 70/100</div>
                     </div>
                 </div>
 
@@ -326,36 +326,44 @@
                     </div>
                     <div class="history-list" id="gasoil-history">
                         <div class="history-item">
-                            <div class="history-date">09/06</div>
+                            <div class="history-date">Ven</div>
                             <div class="history-details">
-                                <strong>Fourgon — Zone 2</strong>
-                                <span>442 km • 65.5 L</span>
+                                <strong>Véhicule — Zone 4 Mahdia</strong>
+                                <span>140 km • 18.5 L</span>
                             </div>
-                            <div class="history-consumption high">14.8 L/100</div>
+                            <div class="history-consumption normal">13.2 L/100</div>
                         </div>
                         <div class="history-item">
-                            <div class="history-date">08/06</div>
+                            <div class="history-date">Jeu</div>
                             <div class="history-details">
-                                <strong>Pick-up — Zone 1</strong>
-                                <span>285 km • 38.2 L</span>
+                                <strong>Véhicule — Zone 3 Sfax Sud</strong>
+                                <span>75 km • 10.2 L</span>
                             </div>
-                            <div class="history-consumption normal">13.4 L/100</div>
+                            <div class="history-consumption high">13.6 L/100</div>
                         </div>
                         <div class="history-item">
-                            <div class="history-date">07/06</div>
+                            <div class="history-date">Mer</div>
                             <div class="history-details">
-                                <strong>Camionnette — Zone 3</strong>
-                                <span>198 km • 22.1 L</span>
+                                <strong>Véhicule — Zone 2 Sfax Nord</strong>
+                                <span>70 km • 9.1 L</span>
+                            </div>
+                            <div class="history-consumption normal">13.0 L/100</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date">Mar</div>
+                            <div class="history-details">
+                                <strong>Véhicule — Zone 1 Jbiniana</strong>
+                                <span>25 km • 2.8 L</span>
                             </div>
                             <div class="history-consumption good">11.2 L/100</div>
                         </div>
                         <div class="history-item">
-                            <div class="history-date">06/06</div>
+                            <div class="history-date">Lun</div>
                             <div class="history-details">
-                                <strong>Fourgon — Zone 4</strong>
-                                <span>520 km • 74.0 L</span>
+                                <strong>Véhicule — Zone 1 Jbiniana</strong>
+                                <span>30 km • 3.5 L</span>
                             </div>
-                            <div class="history-consumption high">14.2 L/100</div>
+                            <div class="history-consumption good">11.7 L/100</div>
                         </div>
                     </div>
                 </div>
@@ -405,7 +413,7 @@
                         </div>
                         <div class="audit-section-body" id="body-seiri">
                             <div class="audit-criteria">
-                                <label>Les objets inutiles sont identifiés et retirés</label>
+                                <label>Matériaux inutiles éliminés / Seuls composants nécessaires en stock</label>
                                 <input type="range" min="1" max="5" value="3" class="audit-slider" data-criteria="seiri">
                                 <div class="slider-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
                             </div>
@@ -436,7 +444,7 @@
                         </div>
                         <div class="audit-section-body" id="body-seiton">
                             <div class="audit-criteria">
-                                <label>Chaque outil/composant a un emplacement défini et étiqueté</label>
+                                <label>Chaque article a un emplacement défini / Étiquettes lisibles et à jour</label>
                                 <input type="range" min="1" max="5" value="3" class="audit-slider" data-criteria="seiton">
                                 <div class="slider-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
                             </div>
@@ -467,7 +475,7 @@
                         </div>
                         <div class="audit-section-body" id="body-seiso">
                             <div class="audit-criteria">
-                                <label>La zone est propre, sans poussière ni déchets au sol</label>
+                                <label>Sol propre et dégagé / Équipements en bon état</label>
                                 <input type="range" min="1" max="5" value="3" class="audit-slider" data-criteria="seiso">
                                 <div class="slider-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
                             </div>
@@ -498,7 +506,7 @@
                         </div>
                         <div class="audit-section-body" id="body-seiketsu">
                             <div class="audit-criteria">
-                                <label>Le marquage au sol et les affichages sont respectés</label>
+                                <label>Marquage au sol respecté / Photos de référence affichées</label>
                                 <input type="range" min="1" max="5" value="3" class="audit-slider" data-criteria="seiketsu">
                                 <div class="slider-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
                             </div>
@@ -529,7 +537,7 @@
                         </div>
                         <div class="audit-section-body" id="body-shitsuke">
                             <div class="audit-criteria">
-                                <label>Les équipes respectent les procédures définies quotidiennement</label>
+                                <label>Audit réalisé chaque mois / Écarts corrigés dans la semaine</label>
                                 <input type="range" min="1" max="5" value="3" class="audit-slider" data-criteria="shitsuke">
                                 <div class="slider-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
                             </div>
@@ -591,26 +599,26 @@
                         <div class="stock-item-header">
                             <div class="stock-icon">☀️</div>
                             <div class="stock-info">
-                                <strong>Panneaux Solaires 580W</strong>
-                                <span class="stock-status status-ok">● Stock OK</span>
+                                <strong>Panneaux PV 580W</strong>
+                                <span class="stock-status status-ok">● Zone Verte</span>
                             </div>
                         </div>
                         <div class="stock-levels">
                             <div class="stock-level">
                                 <span class="level-label">QTÉ</span>
-                                <span class="level-value">145</span>
+                                <span class="level-value">25</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MIN</span>
-                                <span class="level-value">50</span>
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">20</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MAX</span>
-                                <span class="level-value">200</span>
+                                <span class="level-label">ROUGE</span>
+                                <span class="level-value">10</span>
                             </div>
                         </div>
                         <div class="stock-bar-container">
-                            <div class="stock-bar stock-bar-ok" style="width:72%"></div>
+                            <div class="stock-bar stock-bar-ok" style="width:63%"></div>
                         </div>
                     </div>
 
@@ -618,26 +626,26 @@
                         <div class="stock-item-header">
                             <div class="stock-icon">☀️</div>
                             <div class="stock-info">
-                                <strong>Panneaux Solaires 440W</strong>
-                                <span class="stock-status status-warning">● Commande Requise</span>
+                                <strong>Panneaux PV 440W</strong>
+                                <span class="stock-status status-warning">● Zone Jaune — Commander</span>
                             </div>
                         </div>
                         <div class="stock-levels">
                             <div class="stock-level">
                                 <span class="level-label">QTÉ</span>
-                                <span class="level-value">78</span>
+                                <span class="level-value">18</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MIN</span>
-                                <span class="level-value">70</span>
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">25</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MAX</span>
-                                <span class="level-value">150</span>
+                                <span class="level-label">ROUGE</span>
+                                <span class="level-value">15</span>
                             </div>
                         </div>
                         <div class="stock-bar-container">
-                            <div class="stock-bar stock-bar-warning" style="width:52%"></div>
+                            <div class="stock-bar stock-bar-warning" style="width:45%"></div>
                         </div>
                     </div>
 
@@ -645,26 +653,26 @@
                         <div class="stock-item-header">
                             <div class="stock-icon">🔌</div>
                             <div class="stock-info">
-                                <strong>DC Cable (4mm²)</strong>
-                                <span class="stock-status status-ok">● Stock OK</span>
+                                <strong>Câble DC 6mm²</strong>
+                                <span class="stock-status status-ok">● Zone Verte</span>
                             </div>
                         </div>
                         <div class="stock-levels">
                             <div class="stock-level">
                                 <span class="level-label">QTÉ</span>
-                                <span class="level-value">890m</span>
+                                <span class="level-value">420m</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MIN</span>
-                                <span class="level-value">300m</span>
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">350m</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MAX</span>
-                                <span class="level-value">1000m</span>
+                                <span class="level-label">ROUGE</span>
+                                <span class="level-value">200m</span>
                             </div>
                         </div>
                         <div class="stock-bar-container">
-                            <div class="stock-bar stock-bar-ok" style="width:89%"></div>
+                            <div class="stock-bar stock-bar-ok" style="width:70%"></div>
                         </div>
                     </div>
 
@@ -672,26 +680,26 @@
                         <div class="stock-item-header">
                             <div class="stock-icon">🔌</div>
                             <div class="stock-info">
-                                <strong>AC Cable (6mm²)</strong>
-                                <span class="stock-status status-critical">● Stock Critique</span>
+                                <strong>Câble AC 4mm²</strong>
+                                <span class="stock-status status-critical">● Zone ROUGE — Rupture</span>
                             </div>
                         </div>
                         <div class="stock-levels">
                             <div class="stock-level">
                                 <span class="level-label">QTÉ</span>
-                                <span class="level-value critical-val">115m</span>
+                                <span class="level-value critical-val">120m</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MIN</span>
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">300m</span>
+                            </div>
+                            <div class="stock-level">
+                                <span class="level-label">ROUGE</span>
                                 <span class="level-value">150m</span>
-                            </div>
-                            <div class="stock-level">
-                                <span class="level-label">MAX</span>
-                                <span class="level-value">600m</span>
                             </div>
                         </div>
                         <div class="stock-bar-container">
-                            <div class="stock-bar stock-bar-critical" style="width:19%"></div>
+                            <div class="stock-bar stock-bar-critical" style="width:20%"></div>
                         </div>
                     </div>
 
@@ -699,26 +707,53 @@
                         <div class="stock-item-header">
                             <div class="stock-icon">🏗️</div>
                             <div class="stock-info">
-                                <strong>Structure (Kit Montage)</strong>
-                                <span class="stock-status status-ok">● Stock OK</span>
+                                <strong>Structure Aluminium</strong>
+                                <span class="stock-status status-ok">● Zone Verte</span>
                             </div>
                         </div>
                         <div class="stock-levels">
                             <div class="stock-level">
                                 <span class="level-label">QTÉ</span>
-                                <span class="level-value">32 sets</span>
+                                <span class="level-value">120m</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MIN</span>
-                                <span class="level-value">15</span>
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">100m</span>
                             </div>
                             <div class="stock-level">
-                                <span class="level-label">MAX</span>
-                                <span class="level-value">50</span>
+                                <span class="level-label">ROUGE</span>
+                                <span class="level-value">50m</span>
                             </div>
                         </div>
                         <div class="stock-bar-container">
-                            <div class="stock-bar stock-bar-ok" style="width:64%"></div>
+                            <div class="stock-bar stock-bar-ok" style="width:60%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stock-item" data-status="ok">
+                        <div class="stock-item-header">
+                            <div class="stock-icon">⚡</div>
+                            <div class="stock-info">
+                                <strong>Onduleurs</strong>
+                                <span class="stock-status status-ok">● Zone Verte</span>
+                            </div>
+                        </div>
+                        <div class="stock-levels">
+                            <div class="stock-level">
+                                <span class="level-label">QTÉ</span>
+                                <span class="level-value">12</span>
+                            </div>
+                            <div class="stock-level">
+                                <span class="level-label">JAUNE</span>
+                                <span class="level-value">10</span>
+                            </div>
+                            <div class="stock-level">
+                                <span class="level-label">ROUGE</span>
+                                <span class="level-value">5</span>
+                            </div>
+                        </div>
+                        <div class="stock-bar-container">
+                            <div class="stock-bar stock-bar-ok" style="width:60%"></div>
                         </div>
                     </div>
                 </div>
@@ -765,10 +800,10 @@
                             <label for="rc-supplier">Fournisseur</label>
                             <select id="rc-supplier" class="form-input form-select">
                                 <option value="">Sélectionner...</option>
-                                <option value="jinko">JinKo Solar</option>
-                                <option value="longi">LONGi Solar</option>
-                                <option value="canadian">Canadian Solar</option>
-                                <option value="trina">Trina Solar</option>
+                                <option value="oursun">Our Sun</option>
+                                <option value="scape">Scape</option>
+                                <option value="cei">Cei</option>
+                                <option value="forgeron">Forgeron</option>
                             </select>
                         </div>
 
